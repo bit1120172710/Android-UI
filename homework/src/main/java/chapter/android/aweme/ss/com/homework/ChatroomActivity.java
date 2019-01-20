@@ -27,6 +27,7 @@ public class ChatroomActivity extends AppCompatActivity implements View.OnClickL
             TextView content = findViewById(R.id.tv_content_info);
             content.append("我：" + editText.getText() + "\n");
             editText.setText("");
+
             //Toast.makeText(this, findViewById(R.id.ed_say).getContext().toString(), Toast.LENGTH_SHORT).show();
 
         }

@@ -16,7 +16,6 @@ import chapter.android.aweme.ss.com.chapter1.R;
 public class SaveInstanceStateActivity extends AppCompatActivity {
 
     private static final String TAG = "SaveInstance";
-
     private static final String ON_CREATE = "onCreate";
     private static final String ON_START = "onStart";
     private static final String ON_RESUME = "onResume";
