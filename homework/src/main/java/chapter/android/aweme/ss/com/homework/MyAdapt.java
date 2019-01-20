@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -50,12 +51,14 @@ public class MyAdapt extends RecyclerView.Adapter<MyAdapt.MyViewHolder> {
         private TextView description;
         private TextView time;
         private CircleImageView pic;
+        private ImageView official_pic;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             title=itemView.findViewById(R.id.tv_title);
             description=itemView.findViewById(R.id.tv_description);
             time=itemView.findViewById(R.id.tv_time);
             pic=itemView.findViewById(R.id.iv_avatar);
+            official_pic=itemView.findViewById(R.id.robot_notice);
             itemView.setOnClickListener(this);
         }
         public void bind(int position)
@@ -75,6 +78,11 @@ public class MyAdapt extends RecyclerView.Adapter<MyAdapt.MyViewHolder> {
             }else if(msg.getIcon().equals("TYPE_STRANGER"))
             {
                 pic.setImageResource(R.drawable.session_stranger);
+                official_pic.setVisibility(View.INVISIBLE);
+            }
+            else
+            { official_pic.setVisibility(View.INVISIBLE);
+
             }
         }
         @Override

@@ -28,8 +28,9 @@
 
         <ImageView
             android:id="@+id/robot_notice"
+            android:src="@drawable/im_icon_notice_official"
             style="@style/IMVerifyBdage"
-            tools:visibility="visible" />
+            android:visibility="visible" />
     </FrameLayout>
 
 
