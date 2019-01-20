@@ -12,12 +12,14 @@ import android.widget.TextView;
 import java.util.List;
 
 import chapter.android.aweme.ss.com.homework.model.Message;
+import chapter.android.aweme.ss.com.homework.widget.CircleImageView;
 
 public class MyAdapt extends RecyclerView.Adapter<MyAdapt.MyViewHolder> {
    private List<Message>messages;
-
-    public MyAdapt(List<Message> messages) {
+    private MyItemClickListener listener;
+    public MyAdapt(List<Message> messages,MyItemClickListener listener) {
     this.messages=messages;
+    this.listener=listener;
     }
 
     @NonNull
@@ -30,7 +32,6 @@ public class MyAdapt extends RecyclerView.Adapter<MyAdapt.MyViewHolder> {
         View view = inflater.inflate(layoutIdForListItem, viewGroup, shouldAttachToParentImmediately);
         MyViewHolder viewHolder = new MyViewHolder(view);
        // viewHolder.time.setText("s:"+i);
-
         return viewHolder;
     }
 
@@ -44,21 +45,49 @@ public class MyAdapt extends RecyclerView.Adapter<MyAdapt.MyViewHolder> {
         return messages.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder{
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private TextView title;
         private TextView description;
         private TextView time;
+        private CircleImageView pic;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             title=itemView.findViewById(R.id.tv_title);
             description=itemView.findViewById(R.id.tv_description);
             time=itemView.findViewById(R.id.tv_time);
+            pic=itemView.findViewById(R.id.iv_avatar);
+            itemView.setOnClickListener(this);
         }
-        public void bind(int postion)
+        public void bind(int position)
         {
-            title.setText(messages.get(postion).getTitle());
-            description.setText(messages.get(postion).getDescription());
-            time.setText(messages.get(postion).getTime());
+            title.setText(messages.get(position).getTitle());
+            description.setText(messages.get(position).getDescription());
+            time.setText(messages.get(position).getTime());
+            Message msg=messages.get(position);
+            if(msg.getIcon().equals("TYPE_ROBOT")){
+            pic.setImageResource(R.drawable.session_robot);
+            }else if(msg.getIcon().equals("TYPE_SYSTEM"))
+            {
+                pic.setImageResource(R.drawable.session_system_notice);
+            }else if(msg.getIcon().equals("TYPE_GAME"))
+            {
+                pic.setImageResource(R.drawable.icon_micro_game_comment);
+            }else if(msg.getIcon().equals("TYPE_STRANGER"))
+            {
+                pic.setImageResource(R.drawable.session_stranger);
+            }
         }
+        @Override
+        public void onClick(View v)
+        {
+            int position =getAdapterPosition();
+            if(listener!=null)
+            {
+                listener.onListItemClick(position);
+            }
+        }
+    }
+    public interface MyItemClickListener{
+        void onListItemClick(int position);
     }
 }
